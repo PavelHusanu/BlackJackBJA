@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casino Blackjack</title>
+  <link rel="icon" href="https://fav.farm/🃏" type="image/x-icon">
+  <div class="hotbar">
+  <button id="hotbarSpecial" onclick="location.reload()">Blackjack</button>
+  <button onclick="window.location.href='Index.html'">BJA</button>
+  <button onclick="alert('Roulette coming soon!')">Roulette</button>
+</div>
+  
+  
+
+
+  <style>
+    .hotbarSpecial{
+      background: rgb(250, 225, 83);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+    }
+    .hotbar {
+  display: flex;
+  justify-content: center;
+  background-color: #111;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.hotbar button {
+  background: gold;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.hotbar button:hover {
+  background: #ffd700;
+}
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f 30%, #14532d 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: gold;
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px #000;
+    }
+
+    .game-container {
+      background: #1e3a1f;
+      padding: 20px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      text-align: center;
+    }
+    #topbar{
+      background: #1e3a1f;
+      padding: 20px 225px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      border: #000;
+    }
+    #topbar1{
+      background: #2c3a2d;
+      padding: 20px 112.5px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      border: #000;
+      position: absolute;
+      left: 938px;
+      top: 250px;
+    }
+    #topbar2{
+      background: #1e3a1f;
+      padding: 20px 112.5px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      border: #000;
+      position: absolute;
+      top: 250px;
+      left: 714px;
+      
+    }
+
+    .hand {
+      margin: 20px 0;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .card {
+      width: 60px;
+      height: 90px;
+      background: white;
+      color: black;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+    }
+
+    .card.deal {
+      animation: dealCard 0.4s ease-out;
+    }
+
+    .card.no-animate {
+      animation: none !important;
+    }
+
+    .card.face-down {
+      background: darkred;
+      color: darkred;
+    }
+
+    @keyframes dealCard {
+      from {
+        transform: translateY(-100px) rotate(-15deg);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+      }
+    }
+
+    .hand-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1em;
+      color: #d4af37;
+      margin-top: 5px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .buttons button {
+      background-color: #d4af37;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 8px;
+      margin: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .buttons button:hover {
+      background-color: #ffd700;
+    }
+
+    #status {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    #bankroll {
+      font-family: 'Orbitron', sans-serif;
+      margin-top: 10px;
+      color: #4ade80;
+      font-size: 1.1em;
+    }
+
+    .betting-area {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .chip {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 30%, #ffcc00, #b8860b);
+      color: black;
+      font-weight: bold;
+      font-size: 1.1em;
+      box-shadow: 0 0 10px #000;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .chip:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>Blackjack</h1>
+  <div class="game-container">
+    <div id="bankroll">Bankroll: $1000</div>
+    <div class="betting-area">
+      <div class="chip" onclick="placeBet(10)">$10</div>
+      <div class="chip" onclick="placeBet(25)">$25</div>
+      <div class="chip" onclick="placeBet(50)">$50</div>
+      <div class="chip" onclick="placeBet(100)">$100</div>
+    </div>
+    <div class="hand" id="dealer">
+      <h2>Dealer</h2>
+      <div class="cards" id="dealer-cards"></div>
+      <div class="hand-value" id="dealer-value"></div>
+    </div>
+    <div class="hand" id="player">
+      <h2>Player</h2>
+      <div class="cards" id="player-cards"></div>
+      <div class="hand-value" id="player-value"></div>
+    </div>
+    <div class="buttons">
+      <button onclick="hit()">Hit</button>
+      <button onclick="stand()">Stand</button>
+    </div>
+    <div id="status"></div>
+  </div>
+
+  <audio id="deal-sound" src="https://www.soundjay.com/misc/sounds/card-dealing-1.mp3"></audio>
+
+  <script>
+    const suits = ['♠', '♥', '♦', '♣'];
+    const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+    let deck, playerHand, dealerHand, gameOver, currentBet = 0;
+    let bankroll = localStorage.getItem('bankroll') ? parseInt(localStorage.getItem('bankroll')) : 1000;
+    let wins = localStorage.getItem('wins') ? parseInt(localStorage.getItem('wins')) : 0;
+    let losses = localStorage.getItem('losses') ? parseInt(localStorage.getItem('losses')) : 0;
+
+    function updateBankrollDisplay() {
+      document.getElementById('bankroll').textContent = `Bankroll: $${bankroll} | Wins: ${wins} | Losses: ${losses}`;
+    }
+
+    function placeBet(amount) {
+      if (bankroll >= amount) {
+        currentBet = amount;
+        document.getElementById('status').textContent = `You bet $${amount}`;
+        startGame();
+      } else {
+        document.getElementById('status').textContent = `Not enough money to bet $${amount}`;
+      }
+    }
+
+    function createDeck() {
+      deck = [];
+      for (let suit of suits) {
+        for (let value of values) {
+          deck.push({ value, suit });
+        }
+      }
+      deck.sort(() => Math.random() - 0.5);
+    }
+
+    function drawCard() {
+      document.getElementById('deal-sound').play();
+      return deck.pop();
+    }
+
+    function getHandValue(hand) {
+      let value = 0, aces = 0;
+      for (let card of hand) {
+        if (['K', 'Q', 'J'].includes(card.value)) value += 10;
+        else if (card.value === 'A') { value += 11; aces++; }
+        else value += parseInt(card.value);
+      }
+      while (value > 21 && aces) { value -= 10; aces--; }
+      return value;
+    }
+
+    function renderHands() {
+      const dealerDiv = document.getElementById('dealer-cards');
+      const playerDiv = document.getElementById('player-cards');
+      dealerDiv.innerHTML = '';
+      playerDiv.innerHTML = '';
+
+      dealerHand.forEach((card, index) => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.textContent = `${card.value}${card.suit}`;
+        if (index === 0 && !card.revealed) {
+          div.classList.add('face-down'); // Add face-down class for hidden card
+        }
+        dealerDiv.appendChild(div);
+      });
+
+      playerHand.forEach(card => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.textContent = `${card.value}${card.suit}`;
+        playerDiv.appendChild(div);
+      });
+
+      document.getElementById('dealer-value').textContent = 'Total: ' + (dealerHand[0].revealed ? getHandValue(dealerHand) : '???');
+      document.getElementById('player-value').textContent = 'Total: ' + getHandValue(playerHand);
+    }
+
+    function startGame() {
+      createDeck();
+      gameOver = false;
+      playerHand = [drawCard(), drawCard()];
+      dealerHand = [drawCard(), drawCard()];
+      dealerHand[0].revealed = false; // Dealer's first card is hidden
+      document.getElementById('status').textContent = '';
+      renderHands();
+
+      if (getHandValue(playerHand) === 21) {
+        endGame("Blackjack! You win!", 'win');
+      }
+    }
+
+    function hit() {
+      if (gameOver) return;
+      playerHand.push(drawCard());
+      const playerDiv = document.getElementById('player-cards');
+      const lastCard1 = playerDiv.lastChild;
+      lastCard1.classList.add('deal'); 
+      renderHands();
+
+      if (getHandValue(playerHand) > 21) {
+        endGame("Bust! You lose.", 'lose');
+      }
+    }
+
+    function stand() {
+      if (gameOver) return;
+
+      // Reveal the dealer's hidden card and apply flip animation
+      dealerHand[0].revealed = true;
+      const dealerDiv = document.getElementById('dealer-cards');
+      const firstCard = dealerDiv.firstChild;
+      firstCard.classList.add('flip'); // Apply flip animation only for the first revealed card
+      renderHands();
+
+      const dealerPlay = () => {
+        if (getHandValue(dealerHand) < 17) {
+          dealerHand.push(drawCard());
+          renderHands();
+          const lastCard = dealerDiv.lastChild;
+          lastCard.classList.add('deal'); // Apply animation only to the newly dealt card
+          setTimeout(dealerPlay, 1000);
+        } else {
+          const playerValue = getHandValue(playerHand);
+          const dealerValue = getHandValue(dealerHand);
+          if (dealerValue > 21 || playerValue > dealerValue) endGame("You win!", 'win');
+          else if (dealerValue > playerValue) endGame("Dealer wins!", 'lose');
+          else endGame("Push! It's a tie.", null);
+        }
+      };
+
+      setTimeout(dealerPlay, 1000);
+    }
+
+    function endGame(message, result) {
+      gameOver = true;
+      document.getElementById('status').textContent = message;
+      if (result) adjustBankroll(result);
+    }
+
+    function adjustBankroll(result) {
+      if (result === 'win') {
+        bankroll += currentBet;
+        wins++;
+      } else if (result === 'lose') {
+        bankroll -= currentBet;
+        losses++;
+      }
+     function resetStats() {
+  bankroll = 1000;
+  wins = 0;
+  losses = 0;
+  localStorage.setItem('bankroll', bankroll);
+  localStorage.setItem('wins', wins);
+  localStorage.setItem('losses', losses);
+  updateBankrollDisplay();
+  document.getElementById('status').textContent = "Stats reset to default.";
+}
+    }
+
+    updateBankrollDisplay();
+  </script>
+</body>
+</html>
